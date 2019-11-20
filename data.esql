@@ -1,0 +1,16 @@
+SELECT ATTRIBUTE(S):cust,prod,year,sale1_sum_quant,sale2_sum_quant,sale3_sum_quant
+NUMBER OF GROUPING VARIABLES(n):3
+GROUPING ATTRIBUTES(V):cust,prod,year
+F-VECT([F]):sum1_quant, sum2_quant,sum3_quant
+SELECT CONDITION-VECT([σ]):sale1.state='NY',sale2.state='NJ',sale3.state='NJ'
+
+
+select cust, sum(x.quant), sum(y.quant), sum(z.quant)
+from sales
+group by cust: x, y, z
+such that x.state = ‘NY’ and y.state = ‘NJ’and z.state = ‘CT’
+
+select cust,sum(cust)
+from sales
+where state = 'NY'
+group by cust

@@ -1,0 +1,26 @@
+SELECT ATTRIBUTE(S):cust,prod,year,sale1_max_quant,sale2_min_quant,sale3_avg_quant
+NUMBER OF GROUPING VARIABLES(n):3
+GROUPING ATTRIBUTES(V):cust,prod,year
+F-VECT([F]):max1_quant, min2_quant,avg3_quant
+SELECT CONDITION-VECT([σ]):sale1.year='1990',sale2.state='NJ',sale3.month='2'
+
+
+select cust,prod,year, max(x.quant), min(y.quant), avg(z.quant)
+from sales
+group by cust,prod,year: x, y, z
+such that x.year = ‘1990’ and y.state = ‘NJ’and z.month = ‘2’
+
+select cust,prod,year,max(quant)
+from sales
+where year = '1990'
+group by cust,prod,year
+
+select cust,prod,year,min(quant)
+from sales
+where state = 'NY'
+group by cust,prod,year
+
+select cust,prod,year,avg(quant)
+from sales
+where month = '2'
+group by cust,prod,year

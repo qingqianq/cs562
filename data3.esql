@@ -1,0 +1,26 @@
+SELECT ATTRIBUTE(S):prod,year,sale1_sum_quant,sale2_avg_quant,sale3_min_quant
+NUMBER OF GROUPING VARIABLES(n):3
+GROUPING ATTRIBUTES(V):prod,year
+F-VECT([F]):sum1_quant, avg2_quant,min3_quant
+SELECT CONDITION-VECT([σ]):sale1.state='NY',sale2.state='NJ',sale3.state='CT'
+
+
+select cust, sum(x.quant), avg(y.quant), min(z.quant)
+from sales
+group by prod,year : x, y, z
+such that x.state = ‘NY’ and y.state = ‘NJ’and z.state = ‘CT’
+
+select prod,year, sum(quant)
+from sales 
+where state = 'NY'
+group by prod,year
+
+select prod,year,avg(quant)
+from sales 
+where state = 'NJ'
+group by prod,year
+
+select prod,year, min(quant)
+from sales 
+where state = 'CT'
+group by prod,year
